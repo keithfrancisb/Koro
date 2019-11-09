@@ -44,7 +44,7 @@ export default class Login extends React.Component{
         console.log(res);
         this.setState({toastMessage: 'Sign Up Success!'})
       })
-      .catch(error => this.setState({toastMessage: 'Sign Up Failed!'}));
+      .catch(error => this.setState({toastMessage: error.message}));
 
   }
 
@@ -69,7 +69,7 @@ export default class Login extends React.Component{
             Login
           </Button>
         </form>
-        <Toast delay={3000} show={!!toastMessage} onClose={() => this.setState({toastMessage: ''})}>
+        <Toast delay={3000} show={!!toastMessage} onClose={() => this.setState({toastMessage: ''})} autohide animation>
           {toastMessage}
         </Toast>
       </div>
