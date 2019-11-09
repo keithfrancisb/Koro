@@ -1,12 +1,12 @@
-var pgp = require('pg-promise')();
-var db = pgp('SQLKORA://postgres:!23Preoccupied@localhost:3001/kora');
+const pgp = require('pg-promise')();
+const db = pgp('SQLKORA://postgres:!23Preoccupied@localhost:3001/kora');
 
 const getAllUsers = () => {
   const sql = `
-  SELECT
-    *
-  FROM
-    public."tblUsers"
+    SELECT
+      *
+    FROM
+      public."tblUsers"
   `;
 
   return db.any(sql);
@@ -34,10 +34,11 @@ const postUser = (email, password) => {
       ($1, $2)
   `;
 
-  return db.none(sql, email, password);
+  return db.none(sql, [email, password]);
 };
 
 module.exports = {
   getAllUsers,
-  getEmail
+  getEmail,
+  postUser
 };

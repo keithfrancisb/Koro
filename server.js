@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname)));
+app.use(express.json());
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
@@ -13,16 +14,30 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-app.get('/users', (req, res) => {
+app.get('/api/users', (req, res) => {
   if(Object.values(req.query).length < 1) {
     db.getAllUsers()
-      .then(data => res.send(data))
+      .then(data => res.status(200).json(data))
       .catch(error => console.log(error));
   } else {
-      if(req.query.email) {
-        db.getEmail(req.query.email)
-          .then(data => res.send(data))
-          .catch(error => console.log(error));
-      }
+    if(req.query.email) {
+      db.getEmail(req.query.email)
+        .then(data => res.status.apply(200).json(data))
+        .catch(error => console.log(error));
     }
+  }
+});
+
+app.post('/api/users', (req, res) => {
+  const { email, password } = req.body;
+
+  if(!email || !password) {
+    res.status(400).send('Email and/or Password is invalid');
+  }
+  db.postUser(email, password)
+    .then(() => res.status(200).send(true))
+    .catch(error => {
+      console.log(error);
+      res.status(400).send('Signing up Failed!')
+    });
 });

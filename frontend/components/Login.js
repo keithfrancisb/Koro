@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import './Login.css';
+import Toast from 'react-bootstrap/Toast';
 
 export default class Login extends React.Component{
   constructor(){
@@ -10,9 +9,11 @@ export default class Login extends React.Component{
     this.state = {
       isLoading: false,
       email: '',
-      password:''
+      password:'',
+      toastMessage: ''
     };
   }
+
   toggleBoolean(field){
     return () =>{
       this.setState({
@@ -38,17 +39,18 @@ export default class Login extends React.Component{
 
     const { email, password } = this.state;
 
-      try {
-        this.props.userHasAuthenticated(true);
-        this.props.history.push("/");
-      } catch (e) {
-        alert(e.message);
-      }
+    this.props.handleSubmit(email,password)
+      .then(res => {
+        console.log(res);
+        this.setState({toastMessage: 'Sign Up Success!'})
+      })
+      .catch(error => this.setState({toastMessage: 'Sign Up Failed!'}));
+
   }
 
-
-
   render(){
+    const {toastMessage} = this.state;
+
     return(
       <div className="Login">
         <form onSubmit={e => this.handleSubmit(e)}>
@@ -67,6 +69,9 @@ export default class Login extends React.Component{
             Login
           </Button>
         </form>
+        <Toast delay={3000} show={!!toastMessage} onClose={() => this.setState({toastMessage: ''})}>
+          {toastMessage}
+        </Toast>
       </div>
     )
   }
