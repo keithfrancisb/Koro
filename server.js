@@ -4,12 +4,12 @@ const path = require('path');
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'frontend')));
+app.use(express.static(path.join(__dirname)));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'index.html'));
+    res.sendFile(path.join(__dirname+'/index.html'));
 });
 
 
