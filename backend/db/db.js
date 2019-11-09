@@ -16,7 +16,8 @@ const getAllUsers = () => {
   return db.any(sql);
 };
 
-const getEmail = (email) => {
+const login = (email, password) => {
+
   const sql = `
     SELECT
       *
@@ -26,10 +27,20 @@ const getEmail = (email) => {
       "email"  = $1
   `;
 
-  return db.one(sql, email);
+  return db.one(sql, email).then(user => {
+    if(user.email) {
+      const match = bcrypt.compare(password, user.passwordDigest)
+        .then(res => res);
+      if(match) {
+        return user.email;
+      } else {
+        throw new Error('Login Failed!');
+      }
+    }
+  });
 };
 
-const postUser = (email, password) => {
+const signup = (email, password) => {
   return bcrypt.hash(password, saltRounds)
     .then(hash => {
       const sql = `
@@ -45,6 +56,6 @@ const postUser = (email, password) => {
 
 module.exports = {
   getAllUsers,
-  getEmail,
-  postUser
+  signup,
+  login
 };

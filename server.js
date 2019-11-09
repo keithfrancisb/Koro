@@ -20,10 +20,11 @@ app.get('/api/users', (req, res) => {
       .then(data => res.status(200).json(data))
       .catch(error => console.log(error));
   } else {
-    if(req.query.email) {
-      db.getEmail(req.query.email)
-        .then(data => res.status.apply(200).json(data))
-        .catch(error => console.log(error));
+    const { email, password } = req.query;
+    if(email && password) {
+      db.login(email, password)
+        .then(email => res.status(200).json(email))
+        .catch(error => res.status(403).send('Login Failed!'));
     }
   }
 });
@@ -34,10 +35,11 @@ app.post('/api/users', (req, res) => {
   if(!email || !password) {
     res.status(400).send('Email and/or Password is invalid');
   }
-  db.postUser(email, password)
+  db.signup(email, password)
     .then(() => res.status(200).send(true))
     .catch(error => {
       console.log(error);
       res.status(400).send('Signing up Failed!')
     });
 });
+

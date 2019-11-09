@@ -38,21 +38,26 @@ export default class Login extends React.Component{
     e.preventDefault();
 
     const { email, password } = this.state;
+    const { header } = this.props;
 
     this.props.handleSubmit(email,password)
-      .json(res => {
-        console.log(res);
-        this.setState({toastMessage: 'Sign Up Success!'})
+      .json(email => {
+        console.log(email);
+        this.setState({toastMessage: `${header} Success!`});
+        this.props.updateEmail(email);
       })
       .catch(error => this.setState({toastMessage: error.message}));
 
   }
 
-  render(){
+  render() {
     const { toastMessage } = this.state;
 
     return(
       <div className="Login">
+        <h1>
+          {this.props.header}
+        </h1>
         <form onSubmit={e => this.handleSubmit(e)}>
 
           <Form.Group controlId="email" bsSize="large">
@@ -66,7 +71,7 @@ export default class Login extends React.Component{
           </Form.Group>
 
           <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
-            Login
+            {this.props.header}
           </Button>
         </form>
         <Toast delay={3000} show={!!toastMessage} onClose={() => this.setState({toastMessage: ''})} autohide animation>
