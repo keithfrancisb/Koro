@@ -30,7 +30,7 @@ class App extends React.Component {
         <Route exact path='/' render={() => <Redirect to='/splash'/>}/>
         <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail}/>}/>
         <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' updateEmail={this.updateEmail}/>}/>
-        <Route path='/splash' component={Splash} />
+        <Route path='/splash' render={() => <Splash email={email}/>} />
       </Container>
     );
   }
