@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {Redirect} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
@@ -53,8 +54,12 @@ export default class Login extends React.Component{
   render() {
     const { toastMessage } = this.state;
 
-    return(
-      <div className="Login">
+    if(this.props.email) {
+      return <Redirect to='/splash' />
+    };
+
+    return (
+      <React.Fragment>
         <h1>
           {this.props.header}
         </h1>
@@ -77,7 +82,7 @@ export default class Login extends React.Component{
         <Toast delay={3000} show={!!toastMessage} onClose={() => this.setState({toastMessage: ''})} autohide animation>
           {toastMessage}
         </Toast>
-      </div>
-    )
+      </React.Fragment>
+    );
   }
 }

@@ -28,9 +28,9 @@ class App extends React.Component {
         <KoraNavbar email={email} logout={() => this.updateEmail(null)}/>
 
         <Route exact path='/' render={() => <Redirect to='/splash'/>}/>
-        <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail}/>}/>
-        <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' updateEmail={this.updateEmail}/>}/>
-        <Route path='/splash' component={Splash} />
+        <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail} email={email}/>}/>
+        <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' updateEmail={this.updateEmail} email={email}/>}/>
+        <Route path='/splash' render={() => <Splash email={email}/>} />
       </Container>
     );
   }

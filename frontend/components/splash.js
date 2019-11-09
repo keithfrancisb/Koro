@@ -1,10 +1,15 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 
-const Splash = () => {
+const Splash = props => {
+
+  if(!props.email) {
+    return <Redirect to='/login' />
+  }
+
   return (
     <React.Fragment>
-      <Redirect to='/signup' />
+      I am Splash
     </React.Fragment>
   );
 };
