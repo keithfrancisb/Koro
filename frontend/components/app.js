@@ -11,7 +11,7 @@ class App extends React.Component {
     super();
 
     this.state = {
-      email: null,
+      email: null
     };
 
     this.updateEmail = this.updateEmail.bind(this);
@@ -25,7 +25,7 @@ class App extends React.Component {
     const { email } = this.state;
     return (
       <Container>
-        <KoraNavbar email={email}/>
+        <KoraNavbar email={email} logout={() => this.updateEmail(null)}/>
 
         <Route exact path='/' render={() => <Redirect to='/splash'/>}/>
         <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail}/>}/>
