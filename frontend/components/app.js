@@ -1,8 +1,10 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
-import Login from './Login';
 import {signup} from '../util/services';
 import Container from 'react-bootstrap/Container';
+
+import Login from './login';
+import Splash from './splash';
 class App extends React.Component {
   constructor() {
     super();
@@ -16,8 +18,9 @@ class App extends React.Component {
     return (
       <Container>
 
-        <Route path='/' render={() => <Redirect to='/signup'/>}/>
+        <Route exact path='/' render={() => <Redirect to='/splash'/>}/>
         <Route path='/signup' render={() => <Login handleSubmit={signup}/>}/>
+        <Route path='/splash' component={Splash} />
       </Container>
     );
   }
