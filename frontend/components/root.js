@@ -1,10 +1,12 @@
 import React from 'react';
+import App from './app';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 const Root = () => {
   return (
-    <div>
-      I am root!
-    </div>
+    <Router>
+      <App />
+    </Router>
   );
 };
 

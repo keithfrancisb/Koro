@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-//import {Button, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.css';
+// import './Login.css';
 
 export default class Login extends React.Component{
   constructor(){
