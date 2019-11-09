@@ -11,7 +11,7 @@ class KoraNavbar extends React.Component {
   }
 
   handleLogout() {
-    console.log('Should log out');
+    this.props.logout();
   }
 
   render() {
