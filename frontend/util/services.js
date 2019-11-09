@@ -6,8 +6,8 @@ export const signup = (email, password) => {
     email,
     password
   };
-  console.log(data, 'in signup service');
+
   return wretch('/api/users')
-    .json(data)
-    .post()
+          .json(data)
+          .post()
 };

@@ -40,7 +40,7 @@ export default class Login extends React.Component{
     const { email, password } = this.state;
 
     this.props.handleSubmit(email,password)
-      .then(res => {
+      .json(res => {
         console.log(res);
         this.setState({toastMessage: 'Sign Up Success!'})
       })
@@ -49,7 +49,7 @@ export default class Login extends React.Component{
   }
 
   render(){
-    const {toastMessage} = this.state;
+    const { toastMessage } = this.state;
 
     return(
       <div className="Login">
