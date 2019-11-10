@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 
 const QuestionItem = ({question}) =>(
     <Row className="justify-content-lg-center m-3">
-        <Col lg={4}>
+        <Col lg={9}>
             <Card>
                 <Card.Header>
                     <span className="font-weight-bolder">

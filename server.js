@@ -28,7 +28,7 @@ app.get('/api/users', (req, res) => {
     const { email, password } = req.query;
     if(email && password) {
       user.login(email, password)
-        .then(email => res.status(200).json(email))
+        .then(({email, userID}) => res.status(200).json({email,userId:userID}))
         .catch(error => res.status(403).send('Login Failed!'));
     }
   }
@@ -41,7 +41,7 @@ app.post('/api/users', (req, res) => {
     res.status(400).send('Email and/or Password is invalid');
   }
   user.signup(email, password)
-    .then(() => res.status(200).send(true))
+    .then(({email, userID}) => res.status(200).json({email,userId:userID}))
     .catch(error => {
       console.log(error);
       res.status(400).send('Signing up Failed!')

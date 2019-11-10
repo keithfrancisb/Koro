@@ -10,7 +10,7 @@ const Splash = props => {
 
   return (
     <React.Fragment>
-      <Jumbotron fluid>
+      <Jumbotron fluid className="text-center">
         <h1>Kora</h1>
         <p>Ask away!</p>
       </Jumbotron>

@@ -13,25 +13,26 @@ class App extends React.Component {
     super();
 
     this.state = {
+      userId: null,
       email: null
     };
 
-    this.updateEmail = this.updateEmail.bind(this);
+    this.authenticateUser = this.authenticateUser.bind(this);
   }
 
-  updateEmail(email) {
-    this.setState({email});
-  }
+  authenticateUser(userId, email) {
+    this.setState({userId, email});
+  } 
 
   render() {
     const { email } = this.state;
     return (
       <Container>
-        <KoraNavbar email={email} logout={() => this.updateEmail(null)}/>
+        <KoraNavbar email={email} logout={() => this.authenticateUser(null)}/>
 
         <Route exact path='/' render={() => <Redirect to='/splash'/>}/>
-        <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail} email={email}/>}/>
-        <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' updateEmail={this.updateEmail} email={email}/>}/>
+        <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' authenticateUser={this.authenticateUser} email={email}/>}/>
+        <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' authenticateUser={this.authenticateUser} email={email}/>}/>
         <Route path='/splash' render={() => <Splash email={email}/>} />
         <Route path='/homepage' render={() => <Homepage /> }/>
       </Container>

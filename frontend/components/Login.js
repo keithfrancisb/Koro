@@ -43,10 +43,10 @@ export default class Login extends React.Component{
     const { header } = this.props;
 
     this.props.handleSubmit(email,password)
-      .json(email => {
-        console.log(email);
+      .json(userData => {
+        const { email, userId } = userData;
         this.setState({toastMessage: `${header} Success!`});
-        this.props.updateEmail(email);
+        this.props.authenticateUser(userId, email);
       })
       .catch(error => this.setState({toastMessage: error.message}));
 

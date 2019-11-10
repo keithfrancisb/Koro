@@ -1,6 +1,5 @@
 import wretch from 'wretch';
 
-
 export const signup = (email, password) => {
   const data = {
     email,
@@ -23,12 +22,19 @@ export const login = (email, password) => {
     .get();
 };
 
-
 export const getQuestions = () => {
-  const data = {
-    questions: []
-  };
   
   return wretch('/api/questions')
     .get();
 };
+
+export const postQuestion = (userId,question) => {
+  const data = { 
+    userId,
+    question
+  };
+
+  return wretch('/api/questions')
+    .json(data)
+    .post();
+}

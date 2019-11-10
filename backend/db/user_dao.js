@@ -31,7 +31,8 @@ const login = (email, password) => {
       const match = bcrypt.compare(password, user.passwordDigest)
         .then(res => res);
       if(match) {
-        return user.email;
+        const {email, userID} = user;
+        return {email, userID};
       } else {
         throw new Error('Login Failed!');
       }
@@ -48,8 +49,12 @@ const signup = (email, password) => {
           ("email", "passwordDigest")
         VALUES
           ($1, $2)
+        RETURNING
+          "userID",
+          "email"
       `;
-      return db.none(sql, [email, hash]);
+      return db.one(sql, [email, hash])
+        .then(user => user);
     });
 };
 
