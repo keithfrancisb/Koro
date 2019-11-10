@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import {getQuestions} from '../util/services';
+import QuestionItem from './questionItems';
 
 class HomePage extends React.Component {
     constructor(){
@@ -11,7 +12,7 @@ class HomePage extends React.Component {
     }
 
     componentDidMount(){
-        getQuestions().then((questions)=>{
+        getQuestions().json((questions)=>{
             this.setState({questions});
         })
     }
@@ -21,23 +22,23 @@ class HomePage extends React.Component {
 
         const{questions} = this.state
         const items = questions.map((question)=>{
-            return <QuestionItem question={question} />
+            return < QuestionItem key={question.questionID} question={question} />
         });
         
-        return(
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm">
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
                         <p>
                             Left side small
                         </p>
                     </div>
-                    <div class="col-md">
-                        <p>
-
-                        </p>
+                    <div className="col-md">
+                        <ul>
+                            {items}
+                        </ul>
                     </div>
-                    <div class="col-sm">
+                    <div className="col-sm">
                         <p>
                             Right side small
                         </p>

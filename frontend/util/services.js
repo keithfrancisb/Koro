@@ -30,6 +30,5 @@ export const getQuestions = () => {
   };
   
   return wretch('/api/questions')
-    .query(data)
     .get();
 };
