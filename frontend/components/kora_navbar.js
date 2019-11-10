@@ -22,9 +22,15 @@ class KoraNavbar extends React.Component {
           <Link to="/splash">Kora</Link>
         </Navbar.Brand>
 
+
         <Navbar.Toggle />
 
         <Navbar.Collapse>
+          
+          <Nav>
+            <Link to="/homepage">Homepage</Link>
+          </Nav>
+          
           <Nav className="ml-auto">
           {this.props.email
             ? <Link onClick={() => this.handleLogout()}>Logout</Link>
