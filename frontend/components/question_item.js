@@ -7,7 +7,11 @@ const QuestionItem = ({question}) =>(
     <Row className="justify-content-lg-center m-3">
         <Col lg={4}>
             <Card>
-                <Card.Header>{`${question.email} asks...`}</Card.Header>
+                <Card.Header>
+                    <span className="font-weight-bolder">
+                        {`${question.email} asks...`}
+                    </span>
+                </Card.Header>
                 <Card.Body>
                     <Card.Text>
                         {question.question}

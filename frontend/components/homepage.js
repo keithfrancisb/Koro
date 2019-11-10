@@ -36,25 +36,4 @@ class HomePage extends React.Component {
     }
 }
 
-    // <div className="container">
-    //     <div className="row">
-    //         <div className="col-sm">
-    //             <p>
-    //                 Left side small
-    //             </p>
-    //         </div>
-    //         <div className="col-md">
-    //             <ul>
-    //                 {items}
-    //             </ul>
-    //         </div>
-    //         <div className="col-sm">
-    //             <p>
-    //                 Right side small
-    //             </p>
-    //         </div>
-    //     </div>
-    // </div>
-
-
 export default HomePage;
