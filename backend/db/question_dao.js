@@ -38,19 +38,21 @@ const getUserQuestions = email => {
   return db.any(sql, email);
 };
 
-module.exports = {
-  getAllQuestions,
-  getUserQuestions
-}
 
 const addQuestion = (userId, question) => {
   const sql = `
-    INSERT INTO
-      public."tblQuestions"
-      ("userID", "question", "timestamp")
-    VALUES
-      ($1, $2, NOW())
+  INSERT INTO
+  public."tblQuestions"
+  ("userID", "question", "timestamp")
+  VALUES
+  ($1, $2, NOW())
   `;
 
   return db.none(sql, [userId, question]);
 }
+
+module.exports = {
+  getAllQuestions,
+  getUserQuestions,
+  addQuestion
+};

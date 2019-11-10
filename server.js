@@ -3,8 +3,8 @@ const path = require('path');
 const app = express();
 
 const user = require('./backend/db/user_dao');
-const q = require('./backend/db/questions_dao');
-const a = require('./backend/db/answers_dao');
+const q = require('./backend/db/question_dao');
+const a = require('./backend/db/answer_dao');
 
 const port = process.env.PORT || 3000;
 
@@ -64,7 +64,19 @@ app.get('/api/questions', (req, res) => {
   }
 });
 
-// --------------------------------------------------------------- QUESTION ENDPOINTS
+app.post('/api/questions', (req, res) => {
+  const { userId, question } = req.body;
+
+  if(!userId || !question) {
+    res.status(400).send(new Error('Invalid userId and/or question'));
+  }
+
+  q.addQuestion(userId, question)
+    .then(() => res.status(200).json({userId, question}))
+    .catch(error => res.status(400).send(new Error(error)));
+});
+
+// --------------------------------------------------------------- ANSWER ENDPOINTS
 
 app.get('/api/answers', (req, res) => {
   const { questionId } = req.query;
@@ -78,4 +90,16 @@ app.get('/api/answers', (req, res) => {
       .then(answers => res.status(200).json(answers))
       .catch(error => resizeTo.status(400).send(new Error(error)))
   }
+});
+
+app.post('/api/answers', (req, res) => {
+  const { userId, questionId, answer } = req.body;
+
+  if(!userId || !questionId || !answer) {
+    res.status(400).send(new Error('Invalid userId, questionId, and/or answer'));
+  }
+
+  q.addQuestion(userId, questionId, answer)
+    .then(() => res.status(200).json({userId, question, answer}))
+    .catch(error => res.status(400).send(new Error(error)));
 });
