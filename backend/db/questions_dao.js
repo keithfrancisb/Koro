@@ -3,9 +3,16 @@ const db = require('./db');
 const getAllQuestions = () => {
   const sql = `
     SELECT
-      *
+      tblQ."questionID",
+      tblQ."question",
+      tblU."email",
+      tblQ."timestamp"
     FROM
-      public."tblQuestions"
+      public."tblQuestions" as tblQ
+    JOIN
+      public."tblUsers" as tblU
+    ON
+      tblU."userID" = tblQ."userID"
   `;
 
   return db.any(sql);
@@ -16,7 +23,8 @@ const getUserQuestions = email => {
   SELECT
     tblQ."questionID",
     tblQ."question",
-    tblQ.timestamp
+    tblU."email",
+    tblQ."timestamp"
   FROM
     public."tblQuestions" as tblQ
   JOIN

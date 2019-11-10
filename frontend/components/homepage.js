@@ -3,13 +3,6 @@ import Container from 'react-bootstrap/Container';
 import {getQuestions} from '../util/services';
 import QuestionItem from './questionItems';
 
-class HomePage extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            questions: []
-        }
-    }
 
     componentDidMount(){
         getQuestions().json((questions)=>{
@@ -18,7 +11,6 @@ class HomePage extends React.Component {
     }
 
 
-    render(){
 
         const{questions} = this.state
         const items = questions.map((question)=>{
@@ -48,6 +40,7 @@ class HomePage extends React.Component {
         )
     }
 }
+
 
 
 export default HomePage;

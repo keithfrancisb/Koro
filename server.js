@@ -60,4 +60,4 @@ app.get('/api/questions', (req, res) => {
       .then(questions => res.status(200).json(questions))
       .catch(error => console.log(error));
   }
-})
+});
