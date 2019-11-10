@@ -22,3 +22,14 @@ export const login = (email, password) => {
     .query(data)
     .get();
 };
+
+
+export const getQuestions = () => {
+  const data = {
+    questions: []
+  };
+  
+  return wretch('/api/questions')
+    .query(data)
+    .get();
+};
