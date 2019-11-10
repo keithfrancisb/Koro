@@ -44,3 +44,15 @@ module.exports = {
   getAllAnswers,
   getQuestionAnswers
 };
+
+const addAnswer = (userId, questionId, answer) => {
+  const sql = `
+    INSERT INTO
+      public.tbl_answers
+      (user_id, question_id, answer, time_stamp)
+    VALUES
+      ($1, $2, $3, NOW())
+  `;
+
+  return db.none(sql, [userId, questionId, answer]);
+}
