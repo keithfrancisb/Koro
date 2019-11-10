@@ -5,14 +5,14 @@ import QuestionItem from './questionItems';
 
 class HomePage extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             questions : []
-        }
+        };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         getQuestions().json((questions)=>{
             this.setState({questions});
         })
@@ -27,26 +27,27 @@ class HomePage extends React.Component {
         });
         
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        <p>
-                            Left side small
-                        </p>
-                    </div>
-                    <div className="col-md">
-                        <ul>
-                            {items}
-                        </ul>
-                    </div>
-                    <div className="col-sm">
-                        <p>
-                            Right side small
-                        </p>
-                    </div>
-                </div>
-            </div>
-        )
+            
+            // <div className="container">
+            //     <div className="row">
+            //         <div className="col-sm">
+            //             <p>
+            //                 Left side small
+            //             </p>
+            //         </div>
+            //         <div className="col-md">
+            //             <ul>
+            //                 {items}
+            //             </ul>
+            //         </div>
+            //         <div className="col-sm">
+            //             <p>
+            //                 Right side small
+            //             </p>
+            //         </div>
+            //     </div>
+            // </div>
+        );
     }
 }
 

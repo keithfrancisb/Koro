@@ -3,8 +3,18 @@ import Card from 'react-bootstrap/Card';
 
 const QuestionItem = ({question}) =>(
 
-    <h4 >{question.question}</h4>
+    // <h4 >{question.question}</h4>
 
+    <Card >
+        <Card.Body>
+            <Card.Title>
+                {question.email}
+            </Card.Title>
+            <Card.Text>
+                {question.question}
+            </Card.Text>
+        </Card.Body>
+    </Card>
 
 
 
@@ -12,14 +22,3 @@ const QuestionItem = ({question}) =>(
  
 export default QuestionItem;
 
-
-    // <Card >
-    //     <Card.body>
-    //         <Card.title>
-    //             {question.questionID}
-    //         </Card.title>
-    //         <Card.text>
-    //             {question.question}
-    //         </Card.text>
-    //     </Card.body>
-    // </Card>
