@@ -1,5 +1,6 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 const Splash = props => {
 
@@ -9,7 +10,10 @@ const Splash = props => {
 
   return (
     <React.Fragment>
-      I am Splash
+      <Jumbotron fluid>
+        <h1>Kora</h1>
+        <p>Ask away!</p>
+      </Jumbotron>
     </React.Fragment>
   );
 };

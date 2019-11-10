@@ -6,6 +6,8 @@ import KoraNavbar from './kora_navbar';
 
 import Login from './login';
 import Splash from './splash';
+import Homepage from './homepage';
+
 class App extends React.Component {
   constructor() {
     super();
@@ -31,6 +33,7 @@ class App extends React.Component {
         <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' updateEmail={this.updateEmail} email={email}/>}/>
         <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' updateEmail={this.updateEmail} email={email}/>}/>
         <Route path='/splash' render={() => <Splash email={email}/>} />
+        <Route path='/homepage' render={() => <Homepage /> }/>
       </Container>
     );
   }
