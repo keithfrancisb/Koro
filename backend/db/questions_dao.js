@@ -14,6 +14,7 @@ const getAllQuestions = () => {
 const getUserQuestions = email => {
   const sql = `
   SELECT
+    tblQ."questionID",
     tblQ."question",
     tblQ.timestamp
   FROM
