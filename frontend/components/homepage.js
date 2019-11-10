@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 
 //
 import ListGroup from 'react-bootstrap/ListGroup';
-// import Post from './new_post';
+import Post from './new_post';
 //
 
 import {getQuestions} from '../util/services';
@@ -22,7 +22,7 @@ class HomePage extends React.Component {
             showModal : false
         };
 
-        // this.toggleModal = this.toggleModal.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
     }
 
     componentDidMount() {
@@ -31,9 +31,9 @@ class HomePage extends React.Component {
         })
     }
 
-    // toggleModal() {
-    //     this.setState({showModal: !this.state.showModal});
-    // }
+    toggleModal() {
+        this.setState({showModal: !this.state.showModal});
+    }
 
 
     render() {
@@ -69,7 +69,7 @@ class HomePage extends React.Component {
                         </Card>
                     </Col>
                 </Row>
-                {/* <Post showModal={showModal} toggleModal={this.toggleModal}/> */}
+                <Post showModal={showModal} toggleModal={this.toggleModal}/>
             </Container>
         );
     }
