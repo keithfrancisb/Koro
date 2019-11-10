@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
 const user = require('./backend/db/user_dao');
 const q = require('./backend/db/questions_dao');
+const a = require('./backend/db/answers_dao');
 
 const port = process.env.PORT || 3000;
 
@@ -54,10 +56,26 @@ app.get('/api/questions', (req, res) => {
   if(!email) {
     q.getAllQuestions()
       .then(questions => res.status(200).json(questions))
-      .catch(error => console.log(error));
+      .catch(error => res.status(400).send(new Error(error)))
   } else {
     q.getUserQuestions(email)
       .then(questions => res.status(200).json(questions))
-      .catch(error => console.log(error));
+      .catch(error => res.status(400).send(new Error(error)))
+  }
+});
+
+// --------------------------------------------------------------- QUESTION ENDPOINTS
+
+app.get('/api/answers', (req, res) => {
+  const { questionId } = req.query;
+
+  if(!questionId) {
+    a.getAllAnswers()
+      .then(answers => res.status(200).json(answers))
+      .catch(error => res.status(400).send(new Error(error)))
+  } else {
+    a.getQuestionAnswers(questionId)
+      .then(answers => res.status(200).json(answers))
+      .catch(error => resizeTo.status(400).send(new Error(error)))
   }
 });
