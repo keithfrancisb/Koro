@@ -81,7 +81,7 @@ app.post('/api/questions', (req, res) => {
 
 // --------------------------------------------------------------- ANSWER ENDPOINTS
 
-app.get('/api/answers', (req, res) => {
+app.get('/api/answers', async (req, res) => {
   const { questionId } = req.query;
 
   if(!questionId) {
@@ -89,9 +89,14 @@ app.get('/api/answers', (req, res) => {
       .then(answers => res.status(200).json(answers))
       .catch(error => res.status(400).send(new Error(error)))
   } else {
-    a.getQuestionAnswers(questionId)
-      .then(answers => res.status(200).json(answers))
-      .catch(error => resizeTo.status(400).send(new Error(error)))
+    try {
+      const question = await q.getQuestion(questionId);
+      const answers = await a.getQuestionAnswers(questionId);
+      console.log(question, answers);
+      res.status(200).json({question, answers});
+    } catch (error) {
+      res.status(400).send(new Error(error));
+    }
   }
 });
 

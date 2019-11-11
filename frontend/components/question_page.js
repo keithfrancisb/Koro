@@ -1,6 +1,8 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import {getQuestionAnswers} from '../util/services';
+import Card from 'react-bootstrap/Card';
+import Spinner from 'react-bootstrap/Spinner';
 
 class QuestionPage extends React.Component {
 
@@ -8,7 +10,8 @@ class QuestionPage extends React.Component {
     super();
 
     this.state = {
-      answers: null
+      answers: [],
+      question: {}
     };
   }
 
@@ -16,13 +19,25 @@ class QuestionPage extends React.Component {
     // fetch the answers
     const {id} = this.props.match.params;
     getQuestionAnswers(id)
-      .json(answers => this.setState({answers}));
+      .json(({question, answers}) => this.setState({answers, question}));
   }
 
   render() {
+    const { question } = this.state;
     return (
       <>
-        {`I am question no. ${this.props.match.params.id}`}
+        <Card>
+          <Card.Header>
+              <span className="font-weight-bolder">
+                  {`${question.email} asks...`}
+              </span>
+          </Card.Header>
+          <Card.Body>
+              <Card.Text>
+                  {question.question}
+              </Card.Text>
+          </Card.Body>
+        </Card>
       </>
     );
   }
