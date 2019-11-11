@@ -4,10 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
 
-const QuestionItem = ({question}) =>(
+const QuestionItem = ({question,userId}) =>(
     <Row className="justify-content-lg-center m-3">
         <Col lg={9}>
-            <Link to={`/question/${question.question_id}`}>
+            <Link to={`/question/${userId}/${question.question_id}`}>
                 <Card>
                     <Card.Header>
                         <span className="font-weight-bolder">

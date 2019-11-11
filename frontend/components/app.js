@@ -37,7 +37,7 @@ class App extends React.Component {
         <Route path='/splash' render={() => <Splash email={email}/>} />
         <Route path='/homepage' render={() => <Homepage userId={userId} email={email}/> }/>
 
-        <Route path='/question/:id' component={QuestionPage} />
+        <Route path='/question/:userId/:questionId' component={QuestionPage} />
       </Container>
     );
   }

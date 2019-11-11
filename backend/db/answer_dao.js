@@ -40,19 +40,45 @@ const getQuestionAnswers = questionId => {
   return db.any(sql, questionId);
 };
 
-module.exports = {
-  getAllAnswers,
-  getQuestionAnswers
+
+const getAnswer = (answerId) => {
+  const sql = `
+  SELECT
+    tblA.answer_id,
+    tblA.question_id,
+    tblU."email",
+    tblA.answer,
+    tblA.time_stamp
+  FROM
+    public.tbl_answers as tblA
+  JOIN
+    public."tblUsers" as tblU
+  ON
+    tblU."userID" = tblA.user_id
+  WHERE
+    tblA.answer_id = $1
+  `;
+
+  return db.one(sql, answerId);
 };
 
 const addAnswer = (userId, questionId, answer) => {
   const sql = `
-    INSERT INTO
-      public.tbl_answers
-      (user_id, question_id, answer, time_stamp)
-    VALUES
-      ($1, $2, $3, NOW())
+  INSERT INTO
+  public.tbl_answers
+  (user_id, question_id, answer, time_stamp)
+  VALUES
+  ($1, $2, $3, current_timestamp)
+  RETURNING
+  answer_id
   `;
-
-  return db.none(sql, [userId, questionId, answer]);
+  
+  return db.one(sql, [userId, questionId, answer]);
 }
+
+module.exports = {
+  getAllAnswers,
+  getQuestionAnswers,
+  getAnswer,
+  addAnswer
+};

@@ -49,9 +49,9 @@ class HomePage extends React.Component {
 
     render() {
         const {questions, showModal} = this.state;
-        const {email} = this.props;
+        const {email, userId} = this.props;
         const items = questions.map((question)=>{
-            return < QuestionItem key={question.question_id} question={question} />
+            return < QuestionItem key={question.question_id} userId={userId} question={question} />
         });
 
         return (

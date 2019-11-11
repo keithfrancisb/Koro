@@ -92,7 +92,7 @@ app.get('/api/answers', async (req, res) => {
     try {
       const question = await q.getQuestion(questionId);
       const answers = await a.getQuestionAnswers(questionId);
-      console.log(question, answers);
+
       res.status(200).json({question, answers});
     } catch (error) {
       res.status(400).send(new Error(error));
@@ -107,7 +107,11 @@ app.post('/api/answers', (req, res) => {
     res.status(400).send(new Error('Invalid userId, questionId, and/or answer'));
   }
 
-  q.addQuestion(userId, questionId, answer)
-    .then(() => res.status(200).json({userId, question, answer}))
+  a.addAnswer(userId, questionId, answer)
+    .then(({answer_id}) => a.getAnswer(answer_id))
+    .then(answerData => {
+      console.log(answerData);
+      res.status(200).json(answerData)
+    })
     .catch(error => res.status(400).send(new Error(error)));
 });

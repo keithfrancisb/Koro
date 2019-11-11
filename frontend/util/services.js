@@ -40,11 +40,20 @@ export const postQuestion = (userId,question) => {
 }
 
 export const getQuestionAnswers = (questionId) => {
-  const data = {
-    questionId
-  }
 
   return wretch('/api/answers')
-    .query(data)
+    .query({questionId})
     .get();
+}
+
+export const postAnswer = (userId, questionId, answer) => {
+  const data = {
+    userId,
+    questionId,
+    answer
+  };
+
+  return wretch('/api/answers')
+    .json(data)
+    .post();
 }
