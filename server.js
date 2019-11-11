@@ -43,7 +43,6 @@ app.post('/api/users', (req, res) => {
   user.signup(email, password)
     .then(({email, userID}) => res.status(200).json({email,userId:userID}))
     .catch(error => {
-      console.log(error);
       res.status(400).send('Signing up Failed!')
     });
 });
@@ -110,7 +109,6 @@ app.post('/api/answers', (req, res) => {
   a.addAnswer(userId, questionId, answer)
     .then(({answer_id}) => a.getAnswer(answer_id))
     .then(answerData => {
-      console.log(answerData);
       res.status(200).json(answerData)
     })
     .catch(error => res.status(400).send(new Error(error)));

@@ -32,12 +32,12 @@ class QuestionPage extends React.Component {
   }
   
   // '/question/:userId/:questionId'
-  submitAnswer() {
+  submitAnswer(e) {
+    e.preventDefault();
     const {userId, questionId} = this.props.match.params;
     const {answer, answers} = this.state;
     postAnswer(userId, questionId, answer)
       .json(data => {
-        debugger
         this.setState({answers: [data, ...answers]})
       });
   }
@@ -66,7 +66,7 @@ class QuestionPage extends React.Component {
         <Form>
           <Form.Label>Answer.</Form.Label>
           <Form.Control value={answer} as="textarea" rows="5" onChange={(e) => this.updateAnswer(e)}/>
-          <Button onClick={() => this.submitAnswer()} variant="primary" type="submit">Submit</Button>
+          <Button onClick={(e) => this.submitAnswer(e)} variant="primary" type="submit">Submit</Button>
         </Form>
 
         <Row>
