@@ -3,16 +3,18 @@ const db = require('./db');
 const getAllQuestions = () => {
   const sql = `
     SELECT
-      tblQ."questionID",
-      tblQ."question",
+      tblQ.question_id,
+      tblQ.question,
       tblU."email",
-      tblQ."timestamp"
+      tblQ.time_stamp
     FROM
-      public."tblQuestions" as tblQ
+      public.tbl_questions as tblQ
     JOIN
       public."tblUsers" as tblU
     ON
-      tblU."userID" = tblQ."userID"
+      tblQ.user_id = tblU."userID"
+    ORDER BY
+      tblQ.time_stamp
   `;
 
   return db.any(sql);
@@ -21,38 +23,63 @@ const getAllQuestions = () => {
 const getUserQuestions = email => {
   const sql = `
   SELECT
-    tblQ."questionID",
-    tblQ."question",
+    tblQ.question_id,
+    tblQ.question,
     tblU."email",
-    tblQ."timestamp"
+    tblQ.time_stamp
   FROM
-    public."tblQuestions" as tblQ
+    public.tbl_questions as tblQ
   JOIN
     public."tblUsers" as tblU
   ON
-    tblQ."userID" = tblU."userID"
+    tblQ.user_id = tblU."userID"
   WHERE
-    tblU."email" = $1;
+    tblU."email" = $1
+  ORDER BY
+    tblQ.time_stamp
   `;
 
   return db.any(sql, email);
+};
+
+const getQuestion = (questionId) => {
+  const sql = `
+  SELECT
+    tblQ.question_id,
+    tblQ.question,
+    tblU."email",
+    tblQ.time_stamp
+  FROM
+    public.tbl_questions as tblQ
+  JOIN
+    public."tblUsers" as tblU
+  ON
+    tblU."userID" = tblQ.user_id
+  WHERE
+    tblQ.question_id = $1
+  `;
+
+  return db.one(sql, questionId);
 };
 
 
 const addQuestion = (userId, question) => {
   const sql = `
   INSERT INTO
-  public."tblQuestions"
-  ("userID", "question", "timestamp")
+    public.tbl_questions
+    (user_id, question, time_stamp)
   VALUES
-  ($1, $2, NOW())
+    ($1, $2, current_timestamp)
+  RETURNING
+    question_id
   `;
 
-  return db.none(sql, [userId, question]);
+  return db.one(sql, [userId, question]);
 }
 
 module.exports = {
   getAllQuestions,
   getUserQuestions,
+  getQuestion,
   addQuestion
 };

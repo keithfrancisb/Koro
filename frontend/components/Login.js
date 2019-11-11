@@ -66,17 +66,18 @@ export default class Login extends React.Component{
         </h1>
         <form onSubmit={e => this.handleSubmit(e)}>
 
-          <Form.Group controlId="email" bsSize="large">
+          <Form.Group controlId="email" >
             <Form.Label>Email</Form.Label>
             <Form.Control autoFocus type="email" value={this.state.email} onChange={this.updateField("email")}/>
+            <Form.Control.Feedback>Looking good!</Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="password" bsSize="large">
+          <Form.Group controlId="password" >
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" value={this.state.password} onChange={this.updateField("password")}/>
           </Form.Group>
 
-          <Button block bsSize="large" disabled={!this.validateForm()} type="submit">
+          <Button block disabled={!this.validateForm()} type="submit">
             {this.props.header}
           </Button>
         </form>

@@ -72,7 +72,10 @@ app.post('/api/questions', (req, res) => {
   }
 
   q.addQuestion(userId, question)
-    .then(() => res.status(200).json({userId, question}))
+    .then(({question_id}) => {
+      return q.getQuestion(question_id);
+    })
+    .then(questionData => res.status(200).json(questionData))
     .catch(error => res.status(400).send(new Error(error)));
 });
 

@@ -25,7 +25,7 @@ class App extends React.Component {
   } 
 
   render() {
-    const { email } = this.state;
+    const { email, userId } = this.state;
     return (
       <Container>
         <KoraNavbar email={email} logout={() => this.authenticateUser(null)}/>
@@ -34,7 +34,7 @@ class App extends React.Component {
         <Route path='/signup' render={() => <Login handleSubmit={signup} header='Sign Up' authenticateUser={this.authenticateUser} email={email}/>}/>
         <Route path='/login' render={() => <Login handleSubmit={login} header='Log In' authenticateUser={this.authenticateUser} email={email}/>}/>
         <Route path='/splash' render={() => <Splash email={email}/>} />
-        <Route path='/homepage' render={() => <Homepage /> }/>
+        <Route path='/homepage' render={() => <Homepage userId={userId} email={email}/> }/>
       </Container>
     );
   }

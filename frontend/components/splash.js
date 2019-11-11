@@ -13,6 +13,7 @@ const Splash = props => {
       <Jumbotron fluid className="text-center">
         <h1>Kora</h1>
         <p>Ask away!</p>
+        <p>Welcome {props.email}</p>
       </Jumbotron>
     </React.Fragment>
   );

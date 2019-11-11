@@ -9,7 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Post from './new_post';
 //
 
-import {getQuestions} from '../util/services';
+import {getQuestions, postQuestion} from '../util/services';
 import QuestionItem from './question_item';
 import Button from 'react-bootstrap/Button';
 
@@ -23,12 +23,23 @@ class HomePage extends React.Component {
         };
 
         this.toggleModal = this.toggleModal.bind(this);
+        this.handlePost = this.handlePost.bind(this);
     }
 
     componentDidMount() {
-        getQuestions().json((questions)=>{
+        getQuestions().json(questions => {
             this.setState({questions});
-        })
+        });
+    }
+
+    handlePost(question) {
+        const {userId} = this.props;
+        postQuestion(userId, question).json(questionData => {
+            this.setState({
+                questions: [questionData, ...this.state.questions],
+                showModal: false
+            });
+        });
     }
 
     toggleModal() {
@@ -37,7 +48,8 @@ class HomePage extends React.Component {
 
 
     render() {
-        const{questions, showModal} = this.state
+        const {questions, showModal} = this.state;
+        const {email} = this.props;
         const items = questions.map((question)=>{
             return < QuestionItem key={question.questionID} question={question} />
         });
@@ -48,7 +60,7 @@ class HomePage extends React.Component {
                     <Col lg={3}>
                         <ListGroup>
                             <ListGroup.Item>
-                                Email
+                                Email : {email ? email : "Guest"}
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 Post history
@@ -69,7 +81,7 @@ class HomePage extends React.Component {
                         </Card>
                     </Col>
                 </Row>
-                <Post showModal={showModal} toggleModal={this.toggleModal}/>
+                <Post showmodal={showModal} togglemodal={this.toggleModal} handlepost={this.handlePost}/>
             </Container>
         );
     }
