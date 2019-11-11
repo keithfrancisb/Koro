@@ -38,3 +38,13 @@ export const postQuestion = (userId,question) => {
     .json(data)
     .post();
 }
+
+export const getQuestionAnswers = (questionId) => {
+  const data = {
+    questionId
+  }
+
+  return wretch('/api/answers')
+    .query(data)
+    .get();
+}

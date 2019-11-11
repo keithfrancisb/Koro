@@ -14,7 +14,7 @@ const getAllQuestions = () => {
     ON
       tblQ.user_id = tblU."userID"
     ORDER BY
-      tblQ.time_stamp
+      tblQ.time_stamp DESC
   `;
 
   return db.any(sql);
@@ -36,7 +36,7 @@ const getUserQuestions = email => {
   WHERE
     tblU."email" = $1
   ORDER BY
-    tblQ.time_stamp
+    tblQ.time_stamp DESC
   `;
 
   return db.any(sql, email);
