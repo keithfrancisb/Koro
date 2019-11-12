@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "12.8.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode=development --watch"
+    "start": "webpack --mode=production && node server.js",
+    "webpack": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
