@@ -3,7 +3,6 @@ import {Redirect} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
-import Homepage from './homepage';
 
 export default class Login extends React.Component{
   constructor(){
