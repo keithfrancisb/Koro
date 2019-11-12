@@ -52,7 +52,7 @@ export const postAnswer = (userId, questionId, answer) => {
     questionId,
     answer
   };
-  debugger
+  
   return wretch('/api/answers')
     .json(data)
     .post();
